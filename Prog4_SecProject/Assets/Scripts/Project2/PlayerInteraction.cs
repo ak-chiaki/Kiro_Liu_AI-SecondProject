@@ -9,7 +9,8 @@ public class PlayerInteraction : MonoBehaviour
         {
             Destroy(other.gameObject); 
 
-            GlobalBlackboard.Find("GameManager").SetVariableValue("HasKey", true);
+            GlobalBlackboard.Find("GlobalAlarmSystem").SetVariableValue("HasKey", true);
+
             Debug.Log("Get Key！");
         }
     }
@@ -18,16 +19,16 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Door"))
         {
-            bool hasKey = GlobalBlackboard.Find("GameManager").GetVariableValue<bool>("HasKey");
+            bool hasKey = GlobalBlackboard.Find("GlobalAlarmSystem").GetVariableValue<bool>("HasKey");//check if player has the key
 
             if (hasKey)
             {
                 Destroy(collision.gameObject); 
-                Debug.Log("Door Open");
+                Debug.Log("Door Open! YOU WIN ! ");
             }
             else
             {
-                Debug.Log("You need a Key to Open the door!");
+                Debug.Log("You need a Key to Open the door!"); // player cannot open the door without the key
             }
         }
     }
